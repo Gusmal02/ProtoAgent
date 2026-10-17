@@ -56,6 +56,9 @@ class ProgrammingRuntime:
                     'evidence_hashes':[sha(s['reviews'][name]) for name in sorted(self.verifiers)]}
         def replanning(view,name):
             s=view.state;candidate=s['candidate']
+            if not candidate and name=='recover' and not s.get('library_checked') and s['enabled'] and s['status']=='running':
+                evidence=getattr(self.generator,'recovery_evidence',lambda _:None)(self.contract)
+                if evidence:return {'entity':view.entity,'revision':view.revision,'goal_scope':self.identity,'artifact_hash':sha({'descriptor_evidence':evidence}),'evidence_hashes':[evidence]}
             if not candidate or not s['enabled'] or s['status']!='running':return None
             reviews=[r for r in s['reviews'].values() if r.get('accepted') is False and r.get('hash')==candidate['hash'] and type(r.get('counterexample')) is dict]
             if reviews:

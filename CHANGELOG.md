@@ -1,5 +1,17 @@
 # Cambios
 
+## 0.2.0.dev8 — reutilización y revisión humana
+
+- Recuperación por descriptor público de interfaces entre contratos diferentes;
+  revalidación funcional acotada y nuevas revisiones QA/Security obligatorias.
+- Comparación sin memoria, catálogo plano y descriptor contextual: todos100/100;
+  con memoria cero propuestas nuevas frente a8.055 candidatos sin recuperación.
+  La preparación previa costó31.074 candidatos; no es coste cero ni mejora de
+  tiempo demostrada sobre el catálogo plano.
+- Ejercicio sintético ejecutable y entrega pendiente de decisión humana ligada
+  al hash. Cambios posteriores invalidan la decisión; no despliega servicios.
+- Replay, colisión, incertidumbre, incompatibilidad y revocación ejercitados.
+
 ## 0.2.0.dev7 — candidata de programación
 
 - Constructor tipado composicional de dos entradas y elección entre variantes

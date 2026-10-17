@@ -9,6 +9,11 @@ Decisión posterior: Gustavo aceptó la dirección y solicitó planificar P1–P
 detallado está preparado en el laboratorio; su implementación no se ha iniciado.
 H4/H5 permanecen posteriores, no campañas paralelas.
 
+2026-10-17: H4 implementado en dev8 para reutilización de código completo entre
+contratos/contextos que comparten interfaz y transformación. H5 ofrece ejercicio
+ejecutable y handoff humano; falta revisión comunitaria real y operación
+sostenida. La recuperación no demuestra invención de un algoritmo nuevo.
+
 Ejecución posterior autorizada: candidata0.2.0.dev7 implementa P1–P3 y pasó la
 secuencia local. Ver [programación P1–P3](docs/PROGRAMACION_P123.md) y los resultados
 de CI para la calificación de cada paquete. H4/H5 no se declaran cerrados.

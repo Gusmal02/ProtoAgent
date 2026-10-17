@@ -1,5 +1,13 @@
 # ProtoAgent: arquitectura y evidencia técnica
 
+Dev8 añade `CapabilityReuseGenerator` y revisión humana local por hash.
+El descriptor público filtra interfaces; un callback del host revalida ejemplos
+del contrato nuevo y el motor decide recuperar o generar. Toda recuperación
+requiere revisiones nuevas. Ver [ejercicio comunitario](docs/EJERCICIO_COMUNITARIO.md).
+Comparación controlada inicial:100/100 en los tres brazos; recuperación elimina
+8.055 candidatos de búsqueda en ese encargo, pero añade comprobaciones y no
+mejora el tiempo contextual. No es aprendizaje de un nuevo algoritmo.
+
 La rama candidata incorpora programación composicional `0.2.0.dev7`:
 consulta [implementación, resultados y reproducción P1–P3](docs/PROGRAMACION_P123.md).
 Calificación local instalada: 24 pruebas unitarias y aceptación integrada

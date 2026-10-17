@@ -132,3 +132,23 @@ externo incierto no se trata como un error ordinario reintentable.
 
 No captures cualquier excepción para seguir como si fuera éxito. No edites
 presupuestos ni permisos en SQLite para hacer pasar una misión fallida.
+
+## Reutilización entre contratos (dev8)
+
+`capability_reuse.CapabilityReuseGenerator(path, library_path=..., verifier=...,
+mode='contextual')` implementa el mismo puerto del generador composicional.
+Modos: `off`, `flat`, `contextual`. El callback confiable
+`verifier(candidate, contract)` devuelve `accepted` y `checks` (1–128), con
+tiempo/efectos acotados por el host. El ejercicio público usa procesos de20s
+máximo para código del compilador confiable. No permite plugins hostiles.
+
+El descriptor considera entradas, columnas y base del proyecto, no respuestas.
+`recover` limita a16 candidatos y registra consultas/verificaciones en
+`retrievals`; un ID repetido sólo admite el mismo contrato/modo. Incertidumbre
+bloquea recuperación y generación hasta reconciliación explícita. Presupuestos
+de búsqueda y revisiones se conservan; recuperación no significa admisión.
+
+`community.prepare_review(...)` crea una entrega pendiente con QA/Security
+vigentes. `community.decide(...)` registra aprobación/rechazo humano local
+por hash; nunca concede autoridad de producción ni autentica al revisor.
+Consulta [ejercicio completo](EJERCICIO_COMUNITARIO.md).

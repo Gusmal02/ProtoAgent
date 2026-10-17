@@ -1,5 +1,12 @@
 # ProtoAgent: arquitectura y evidencia técnica
 
+Dev10 incorpora composición adaptativa con DAGs históricos ligados a código
+revisado: tres encargos nuevos de tres entradas,100/100 reserva cada uno, frente
+a agotamiento frío con igual catálogo y presupuesto. La primitiva stable-sort
+por clave se implementó explícitamente tras el negativo dev9; no fue descubierta
+por el motor. Calificación instalada:30 pruebas y todas las aceptaciones previas.
+Ver [composición verificada](docs/COMPOSICION_VERIFICADA.md).
+
 Dev8 añade `CapabilityReuseGenerator` y revisión humana local por hash.
 El descriptor público filtra interfaces; un callback del host revalida ejemplos
 del contrato nuevo y el motor decide recuperar o generar. Toda recuperación

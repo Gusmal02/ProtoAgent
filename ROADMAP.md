@@ -166,8 +166,9 @@ aciertan100/100; sin memoria se exploran8055 candidatos y con memoria ninguno,
 añadiendo16 comprobaciones de recuperación y revisiones actuales. Preparación
 común:31074 candidatos y636444 operaciones-fila. No se atribuye coste cero.
 No hubo ventaja temporal del descriptor frente al catálogo plano; no se necesita
-repetir este ensayo para reconocer el avance. Próxima ampliación: componer o
-adaptar capacidades ante operaciones realmente diferentes, con banco nuevo.
+repetir este ensayo para reconocer el avance. Esa ampliación ya se implementó
+en dev10 para tres encargos tabulares nuevos; siguen pendientes otros tipos de
+programas y contextos, sin repetir como novedad los casos aceptados.
 
 Guardar sólo subprogramas de trayectorias reales y verificadas. Medir si ayudan
 en nuevos contratos bajo el mismo catálogo y presupuesto; comparar sin memoria,
@@ -181,9 +182,10 @@ aceptaciones incorrectas. Reinicio/revisión de contrato no recuperan autoridad 
 ### H5 — Producto comunitario y operación sostenida
 
 **Estado:** ejercicio y mecanismo de entrega/revisión disponibles. La revisión
-ciega independiente dio evidencia funcional positiva y dos condiciones de guía.
-No repetir otro benchmark masivo para corregir esos puntos: aclararlos y comprobar
-sus ejemplos/instrucciones. Después, uso por una persona y preparación operativa.
+ciega independiente dio evidencia funcional positiva y dos condiciones de guía,
+ya aclaradas y comprobadas. Gustavo aceptó la entrega y se congeló el perfil
+operativo. Siguientes puertas: más usuarios, supervisor calificado y autorización
+de corrida; no otro benchmark masivo para volver a comprobar esas aclaraciones.
 La revisión artificial se conserva como evidencia propia, sin etiquetarla humana.
 
 Ofrecer ejercicios de la empresa simulada, plugins/adaptadores confiables,
@@ -235,15 +237,14 @@ detener la expansión del banco, diagnosticar y conservar la versión negativa.
    comprobados, sin repetir las campañas aceptadas ni modificar el runtime.
 2. **Completado: aceptación del ejercicio por Gustavo.** Se registró su mensaje
    explícito «lo acepto» ligado al hash dev8. La reproducción integral por más
-   usuarios sigue siendo una futura ampliación comunitaria. Una persona sigue el ejercicio, revisa la entrega
-   y registra aceptar/rechazar con sus motivos. La aprobación automática y la
+   usuarios sigue siendo una futura ampliación comunitaria. La aprobación automática y la
    revisión ciega de IA ya realizadas no se descartan ni se confunden con esto.
 3. **Completada la preparación v1, sin activar:** paquete dev8, carga, duración, SLO,
    recursos, retención, cancelación e incidentes según la
    [puerta operativa](docs/OPERACION_SOSTENIDA.md). Revisar promoción de main
    por separado; no desplegar ni arrancar ocho horas desde este documento.
 4. **Implementado y evaluado en dev10:** reutilización composicional/adaptativa
-   para operaciones distintas y proyectos más diversos, sin perder la regresión
+   para tres operaciones tabulares nuevas con una tercera entrada, sin perder la regresión
    ya aprobada. Código hostil exige aislamiento real antes de admitirlo.
 
 ## Referencias y estado de decisiones

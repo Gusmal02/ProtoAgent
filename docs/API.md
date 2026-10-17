@@ -152,3 +152,16 @@ de búsqueda y revisiones se conservan; recuperación no significa admisión.
 vigentes. `community.decide(...)` registra aprobación/rechazo humano local
 por hash; nunca concede autoridad de producción ni autentica al revisor.
 Consulta [ejercicio completo](EJERCICIO_COMUNITARIO.md).
+
+## Composición adaptativa (dev10)
+
+`adaptive_synthesis.AdaptiveReuseGenerator` extiende ese puerto: conserva IR de
+generaciones propias publicadas y comprueba su correspondencia exacta con el
+código histórico. Para tres entradas usa `AdaptiveSynthesizer`; el modo `off`
+usa las mismas primitivas y presupuesto, sin semillas de experiencia.
+
+El presupuesto conserva costes previos y cobra una reserva conservadora del
+DAG completo por candidato. La IR tiene hasta32 nodos, dependencias disjuntas
+para combinar entradas y opcodes admitidos. No hay ejecución de texto o plugins
+extraños. Revocación y revisiones del programa nuevo siguen en ProgrammingRuntime.
+Ver [composición y reproducción](COMPOSICION_VERIFICADA.md).

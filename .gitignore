@@ -1,4 +1,5 @@
 .venv/
+.venv-check/
 venv/
 __pycache__/
 *.py[cod]
@@ -19,3 +20,4 @@ counter-demo/
 data-demo/
 team-demo/
 framework-report/
+reporte-completo/

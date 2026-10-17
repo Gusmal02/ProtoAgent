@@ -1,5 +1,8 @@
 # API contract for v0.1
 
+> Referencia anterior en inglés conservada por compatibilidad documental.
+> La referencia principal en español es [docs/API.md](../../docs/API.md).
+
 All host callbacks and database paths are trusted application code. Neither a
 model nor a tool response may obtain arbitrary Python, SQL, grants or handlers.
 

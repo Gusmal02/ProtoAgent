@@ -1,5 +1,7 @@
 # Security policy and model of trust
 
+> La política principal en español está en [SECURITY.md](../../SECURITY.md).
+
 Experimental local SDK for **trusted host Python and controlled SQLite files**.
 Do not expose this SDK as an unauthenticated public web service. No arbitrary
 plugins/untrusted Python are supported in-process. `-I` is import isolation,

@@ -1,5 +1,9 @@
 # Recovery and operations
 
+> Nota histórica en inglés. Para el recorrido en español, consulta
+> [uso y recuperación](../../docs/USO.md#10-pausar-continuar-y-terminar-no-son-lo-mismo)
+> y [arquitectura técnica](../../Technical.md#2-persistencia-y-fronteras-de-confianza).
+
 1. Pause new work at a durable boundary. Retain every journal/resource database,
    pending identity, original request, evidence, version and consumed budget.
 2. Use `pending_operation_view_from_host()` and

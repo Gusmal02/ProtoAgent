@@ -1,5 +1,7 @@
 # Contributing
 
+> La guía principal en español está en [CONTRIBUTING.md](../../CONTRIBUTING.md).
+
 Use CPython3.12, an isolated environment and a synthetic local workspace.
 The release source archive is deliberately smaller than the research monorepo.
 Build with `python -m pip install build` then `python -m build`; install the

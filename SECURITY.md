@@ -1,39 +1,50 @@
-# Security policy and model of trust
+# Seguridad y fronteras de confianza
 
-Experimental local SDK for **trusted host Python and controlled SQLite files**.
-Do not expose this SDK as an unauthenticated public web service. No arbitrary
-plugins/untrusted Python are supported in-process. `-I` is import isolation,
-not an OS sandbox. Host-issued grants must not be offered as actor tools.
+ProtoAgent0.1 es un SDK experimental para **Python del host y herramientas
+locales confiables**, con archivos SQLite controlados. No lo expongas como
+servicio público sin autenticación ni ejecutes plugins desconocidos en su proceso.
+`python -I` aísla imports; **no es una sandbox del sistema operativo**.
 
-The host owns process/file permissions, credentials, trusted verifiers, current
-entity/policy and native transaction boundaries. Model output, library memory,
-hashes and historical approvals never create authority. An artifact hash binds
-content but does not prove that an untrusted report tells the truth.
+## Qué debe proteger la aplicación
 
-Completion callbacks are registered by trusted host code. They expose proofs
-for a goal+revision+artifact+request and help the explicit completion policy
-choose a terminal action; they do NOT grant execution permission. Session
-freezes these inputs for replay. The native effect revalidates current authority
-and candidate approval. Never fill such callbacks from raw LLM claims.
+El integrador controla permisos de archivos/procesos, credenciales, verificador,
+entidades, política vigente y transacciones nativas. No publiques grants del host
+como herramientas invocables por actores no confiables. Información de memoria,
+hashes, aprobaciones anteriores y respuestas de modelos no conceden autoridad.
 
-Admission/revocation/entity boundaries, replay collisions, stale proofs, budget,
-path traversal and serialization are mandatory regression targets. SQLite
-effect+receipt guarantees do not extend automatically to HTTP or services with
-no durable idempotency/status endpoint. Unknown outcomes remain uncertain.
+Un hash identifica contenido, no demuestra que un informe falso sea verdadero.
+Los callbacks de finalización son código confiable del host: no los rellenes con
+afirmaciones textuales de un LLM. El efecto debe volver a comprobar autorización
+y aprobación antes de comprometerse, incluso si existía una oferta de cierre.
 
-Do not put tokens, API keys or real customer data in examples, checkpoints or
-public reports. A hash-chain journal detects changes, but a host administrator
-able to rewrite its database is outside its tamper-resistance boundary. Encryption
-and immutable external audit storage are not supplied by this release.
+## Garantías locales y límites
 
-## Reporting
+El gate incluye entidad, revisión, admisión, revocación, colisiones, fences,
+presupuesto, serialización y backups. El efecto y su recibo pueden compartir
+transacción en un proveedor local cooperativo. Esto no garantiza exactly-once
+de una API remota sin idempotencia y consulta de estado. Un resultado incierto
+permanece pendiente hasta reconciliarlo; no autoriza reenvío ciego.
 
-No private contact address has been designated. Until a repository with private
-vulnerability reporting is configured, report privately to the project owner
-through your existing direct channel. Do not post secrets or exploitable details
-in a public issue. Include version/hash, bounded synthetic reproducer, affected
-trust boundary and expected/actual effects. No authorization to test real networks.
+La cadena de auditoría detecta cambios respecto de sus hashes. Un administrador
+que puede reescribir el almacenamiento completo queda fuera de esa protección.
+La versión no aporta cifrado ni auditoría externa inmutable. Un backup requiere
+la cooperación de todos los escritores; restaurar no restaura permisos vigentes.
 
-Dependency versions/metadata are inventoried by release qualification. Offline
-review is **not** a current CVE/advisory scan; operators must review vulnerability
-advisories before deploying. No claim of pentesting coverage or ransomware rescue.
+No se promete detección universal de vulnerabilidades, pentesting general,
+protección contra ransomware ni rescate de cualquier sistema comprometido.
+
+## Reportar un problema
+
+No publiques claves, datos reales ni detalles explotables en una Issue pública.
+Si el repositorio ofrece reporte privado de vulnerabilidades, úsalo. En caso
+contrario, comunícalo al propietario por un canal privado previamente conocido.
+Todavía no se designó una dirección privada de contacto; no uses una dirección
+inventada ni abras un reporte público con secretos para suplir esa ausencia.
+
+Incluye versión/commit, frontera afectada, reproducer sintético acotado y
+resultado esperado frente al observado. La documentación no autoriza pruebas
+en redes, cuentas o datos de terceros.
+
+Antes de desplegar, revisa avisos actuales de dependencias y las medidas de tu
+aplicación. El inventario y la revisión offline del paquete no equivalen a un
+escaneo CVE actualizado ni a una auditoría independiente completa.

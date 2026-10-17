@@ -1,5 +1,11 @@
 # ProtoAgent: arquitectura y evidencia técnica
 
+La rama candidata incorpora programación composicional `0.2.0.dev7`:
+consulta [implementación, resultados y reproducción P1–P3](docs/PROGRAMACION_P123.md).
+Calificación local instalada: 24 pruebas unitarias y aceptación integrada
+con corte/reanudación, reparación por QA y mantenimiento de proyecto.
+El resto de este documento conserva la referencia histórica rc3.
+
 Documento técnico de la candidata **0.1.0rc3**. Para instalar y ejecutar sin
 conocer el proyecto, empieza por [USO.md](docs/USO.md). Este documento distingue
 contratos implementados, observaciones experimentales y capacidades aún abiertas.

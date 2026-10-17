@@ -31,6 +31,22 @@ class CompletionChecks(unittest.TestCase):
         abstain=provider.registry.identifier('abstain');self.assertTrue(provider.registry.tools[abstain].available(provider.view)[0])
         self.effect('lead','publish','p');used=self.runtime.state()['used']
         self.effect('lead','publish','p');self.assertEqual(self.runtime.state()['used'],used)
+    def test_verified_replan_requires_current_counterexample_and_authority(self):
+        self.effect('lead','generate','g');state=self.runtime.state()
+        state['reviews']['qa']={'accepted':False,'hash':state['candidate']['hash'],'counterexample':{'input':1,'output':2}}
+        self.save(state)
+        # Existing fixture permits ONE generation: repair must be denied there.
+        self.assertEqual(self.runtime.provider('lead').verified_replans(),[])
+        self.runtime.close()
+        self.runtime=ProgrammingRuntime(self.path/'repair-budget',contract={'examples':[[1,1],[2,2]]},generator=BoundedExpressionGenerator(),verifiers={'qa':lambda c,g:{'accepted':True},'security':lambda c,g:{'accepted':True}},session_factory=lambda *args:StubSession(),generations=2)
+        self.effect('lead','generate','g');state=self.runtime.state()
+        state['reviews']['qa']={'accepted':False,'hash':state['candidate']['hash'],'counterexample':{'input':1,'output':2}}
+        self.save(state);self.assertTrue(self.runtime.provider('lead').verified_replans())
+        state['reviews']['qa']['hash']='0'*64;self.save(state)
+        provider=self.runtime.provider('lead');repairs={provider.registry.identifier(n) for n in ('repair','delegate_builder')}
+        self.assertFalse(any(offer['action'] in repairs for offer in provider.verified_replans()))
+        state['reviews']['qa']['hash']=state['candidate']['hash'];state['enabled']=False;self.save(state)
+        self.assertEqual(self.runtime.provider('lead').verified_replans(),[])
     def test_negative_stale_and_modified_code_no_offer(self):
         self.ready();original=self.runtime.state()
         for variant in ('negative','stale','modified'):

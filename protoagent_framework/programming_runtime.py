@@ -39,12 +39,13 @@ class ProgrammingRuntime:
         return Observation('programming',state['revision'],(float(bool(state['candidate'])),len(state['reviews'])/len(self.verifiers),state['used']/self.limit),
             state=state,description={'contract':self.contract,'capabilities':list(self.verifiers),'authority':'host registered capabilities; no generated code execution'})
     def provider(self,actor):
-        names=['generate','repair','publish','abstain']+['delegate_'+name for name in self.sessions if name!='lead'] if actor=='lead' else (['generate','repair'] if actor=='builder' else ['review'])
+        names=['generate','repair','publish','abstain']+(['recover'] if callable(getattr(self.generator,'recover',None)) else [])+['delegate_'+name for name in self.sessions if name!='lead'] if actor=='lead' else (['generate','repair'] if actor=='builder' else ['review'])
         def available(name,view):
             s=view.state
             if not s['enabled'] or s['status']!='running' or s['used']>=self.limit:return False,'mission stopped'
             if name in ('generate','repair'):return s['attempts']<self.generation_limit and (not s['candidate'] if name=='generate' else bool(s['candidate']) and any(not r['accepted'] for r in s['reviews'].values())),'generation preconditions'
             if name=='review':return bool(s['candidate']) and actor not in s['reviews'],'review current candidate once'
+            if name=='recover':return not s.get('library_checked') and not s['candidate'],'recover once, still requires reviews'
             if name=='publish':return self.accepted(s),'independent acceptance required'
             return True,'available'
         def completion(view):
@@ -53,9 +54,23 @@ class ProgrammingRuntime:
             return {'entity':view.entity,'revision':view.revision,'goal_scope':self.identity,
                     'artifact_hash':s['candidate']['hash'],
                     'evidence_hashes':[sha(s['reviews'][name]) for name in sorted(self.verifiers)]}
-        specs=[ToolDefinition(name,'observe',lambda view:{'mission':self.identity},
+        def replanning(view,name):
+            s=view.state;candidate=s['candidate']
+            if not candidate or not s['enabled'] or s['status']!='running':return None
+            reviews=[r for r in s['reviews'].values() if r.get('accepted') is False and r.get('hash')==candidate['hash'] and type(r.get('counterexample')) is dict]
+            if reviews:
+                if name not in ('repair','delegate_builder') or s['attempts']>=self.generation_limit:return None
+                evidence=[sha(r) for r in reviews]
+            else:
+                # Public independent-review obligations, not an ordered host
+                # route: the motor ranks ALL currently unfulfilled reviewers.
+                target=name[len('delegate_'):] if name.startswith('delegate_') else actor if name=='review' else None
+                if target not in self.verifiers or target in s['reviews']:return None
+                evidence=[sha({'artifact':candidate['hash'],'required_reviewer':target,'mission':self.identity})]
+            return {'entity':view.entity,'revision':view.revision,'goal_scope':self.identity,'artifact_hash':candidate['hash'],'evidence_hashes':evidence}
+        specs=[ToolDefinition(name,'delegate' if name.startswith('delegate_') else 'draft' if name in ('generate','repair') else 'challenge' if name=='review' else 'execute',lambda view:{'mission':self.identity},
             handler=lambda op,r:self.effect(actor,op,r),available=lambda view,n=name:available(n,view),
-            completion=completion if name=='publish' else None) for name in names]
+            completion=completion if name=='publish' else None,replanning=lambda view,n=name:replanning(view,n)) for name in names]
         return RegisteredProvider(ToolRegistry(specs),self.observation,lambda _:self.state()['status']=='completed',session=self.sessions[actor])
     def accepted(self,state):
         candidate=state['candidate']
@@ -64,7 +79,7 @@ class ProgrammingRuntime:
         # Dispatch nested sessions BEFORE opening effect transaction, never
         # round-robin. Only a motor-selected delegate action gets here.
         s=self.state();output=None;tool=request.tool
-        names=(['generate','repair','publish','abstain']+['delegate_'+name for name in self.sessions if name!='lead'] if actor=='lead' else ['generate','repair'] if actor=='builder' else ['review'] if actor in self.verifiers else [])
+        names=(['generate','repair','publish','abstain']+(['recover'] if callable(getattr(self.generator,'recover',None)) else [])+['delegate_'+name for name in self.sessions if name!='lead'] if actor=='lead' else ['generate','repair'] if actor=='builder' else ['review'] if actor in self.verifiers else [])
         if tool not in names or request.entity!='programming' or request.payload!={'mission':self.identity}:raise PermissionError('actor or mission binding')
         if not s['enabled'] or request.revision!=s['revision']:raise PermissionError('mission authority changed')
         old=self.store.receipt(operation)
@@ -78,6 +93,7 @@ class ProgrammingRuntime:
         if not prior and tool in ('generate','repair') and (s['attempts']>=self.generation_limit or (bool(s['candidate']) if tool=='generate' else not s['candidate'] or not any(not r['accepted'] for r in s['reviews'].values()))):raise PermissionError('generation preconditions')
         if tool=='review' and (not s['candidate'] or actor in s['reviews']):raise PermissionError('review preconditions')
         if tool=='publish' and not self.accepted(s):raise PermissionError('unverified candidate')
+        if tool=='recover' and (s.get('library_checked') or s['candidate']):raise PermissionError('recovery preconditions')
         if not prior and s['used']>=self.limit:raise RuntimeError('aggregate dispatch budget exhausted')
         # Reserve aggregate budget durably before any callback or nested action.
         if prior and prior[0]=='uncertain':raise RuntimeError('uncertain generation needs host reconciliation; no resend')
@@ -99,24 +115,44 @@ class ProgrammingRuntime:
                 with self.store.db:self.store.db.execute("UPDATE attempts SET state='uncertain' WHERE id=?",(operation,))
                 try:
                     output=self.generator.generate(operation,self.contract,list(s['reviews'].values()))
-                    metadata={k:output[k] for k in ('search_evaluations','grammar') if k in output}
-                    output={**validate_candidate(output,output.get('author','generator')),**metadata}
+                    cost=output.get('generation_cost',{})
+                    if 'generation_status' in output:
+                        status=output['generation_status']
+                        if status!='candidate':
+                            if status not in ('capability_missing','search_budget_exhausted','frontier_exhausted','invalid_candidate','unsafe_candidate','no_progress'):raise ValueError('generation status')
+                            output={'known_exhaustion':status,'generation_cost':cost}
+                        else:output={**output['candidate'],'generation_cost':cost}
+                    if 'known_exhaustion' in output:
+                        with self.store.db:self.store.db.execute('UPDATE attempts SET state=?,result=? WHERE id=?',('prepared',json.dumps(output),operation))
+                    else:
+                        metadata={k:output[k] for k in ('search_evaluations','grammar','generation_cost') if k in output}
+                        output={**validate_candidate(output,output.get('author','generator')),**metadata}
                 except RuntimeError as exc:
                     if str(exc) not in ('native synthesis budget exhausted','no candidate in finite grammar'):raise
                     output={'known_exhaustion':str(exc)}
+            elif tool=='recover':
+                found=self.generator.recover(operation,self.contract)
+                output={'recovered':None if found is None else validate_candidate(found,found.get('author','library'))}
             elif tool=='review':
                 output=self.verifiers[actor](s['candidate'],self.contract)
                 if type(output) is not dict or type(output.get('accepted')) is not bool:raise ValueError('verifier result schema')
                 output={**output,'hash':s['candidate']['hash'],'reviewer':actor}
-            else:output={}
+            else:
+                if tool=='publish' and callable(getattr(self.generator,'remember',None)):
+                    self.generator.remember(operation,s['candidate'],self.contract,s['reviews'])
+                output={}
             with self.store.db:self.store.db.execute('UPDATE attempts SET state=?,result=? WHERE id=?',('prepared',json.dumps(output),operation))
         def mutate(db,r):
             current=self.state()
             if tool in ('generate','repair'):
-                if 'known_exhaustion' in output:current['status']='capability_exhausted'
+                current.setdefault('generation_costs',[]).append(output.get('generation_cost',{}))
+                if 'known_exhaustion' in output:current['status']=output['known_exhaustion'] if output['known_exhaustion'] in ('capability_missing','search_budget_exhausted','frontier_exhausted','invalid_candidate','unsafe_candidate','no_progress') else 'capability_exhausted'
                 else:
                     current.update(candidate=output,reviews={})
                     current['search_evaluations']=current.get('search_evaluations',0)+output.get('search_evaluations',0)
+            elif tool=='recover':
+                current['library_checked']=True
+                if output['recovered']:current.update(candidate=output['recovered'],reviews={})
             elif tool=='review':current['reviews'][actor]=output
             elif tool=='publish':
                 if not self.accepted(current):raise PermissionError('unverified candidate')

@@ -3,6 +3,10 @@ include Technical.md SECURITY.md CONTRIBUTING.md LICENSE NOTICE
 recursive-include docs *.md
 recursive-include framework/distribution *.md LICENSE NOTICE
 recursive-include tests test_release_*.py release_crash_worker.py release_programming_worker.py
+include tests/p123_worker.py
+include tests/p123_support.py
 recursive-include examples *.py
 include tools/release_gate.py
+include tools/p123_campaign.py
+include ROADMAP.md
 include .github/workflows/framework-release.yml

@@ -1,5 +1,9 @@
 # ProtoAgent Framework
 
+> Rama de desarrollo: candidata **0.2.0.dev7**, extensión de programación
+> composicional P1–P3. [Uso y evaluación](docs/PROGRAMACION_P123.md).
+> La entrega rc3 descrita abajo se conserva como referencia de la versión previa.
+
 ### Decidir, explorar y coordinar con memoria y evidencia. Sin depender de un LLM en cada paso.
 
 **ProtoAgent es un motor de agentes locales para convertir observaciones en

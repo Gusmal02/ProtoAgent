@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "protoagent-framework"
-version = "0.1.0rc3"
+version = "0.2.0.dev7"
 description = "Experimental governed adapter SDK for the Resonant Memory Field ProtoAgent"
 readme = "framework/distribution/README.md"
 requires-python = ">=3.12,<3.13"

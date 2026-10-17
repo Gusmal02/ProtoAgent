@@ -1,9 +1,9 @@
 name: Framework installed release regressions
 on:
   push:
-    paths: ['protoagent_framework/**', 'core/**', 'memory/**', 'framework/distribution/**', 'framework/f8_next/generation_transaction.py', 'framework/f8_next/durable_generation_transport.py', 'framework/f8_next/verified_tool_memory.py', 'tests/**', 'examples/**', 'tools/release_gate.py', 'pyproject.toml', 'setup.py', 'MANIFEST.in', '.github/workflows/framework-release.yml']
+    paths: ['protoagent_framework/**', 'core/**', 'memory/**', 'framework/distribution/**', 'framework/f8_next/generation_transaction.py', 'framework/f8_next/durable_generation_transport.py', 'framework/f8_next/verified_tool_memory.py', 'tests/**', 'examples/**', 'tools/**', 'pyproject.toml', 'setup.py', 'MANIFEST.in', '.github/workflows/framework-release.yml']
   pull_request:
-    paths: ['protoagent_framework/**', 'core/**', 'memory/**', 'framework/distribution/**', 'framework/f8_next/generation_transaction.py', 'framework/f8_next/durable_generation_transport.py', 'framework/f8_next/verified_tool_memory.py', 'tests/**', 'examples/**', 'tools/release_gate.py', 'pyproject.toml', 'setup.py', 'MANIFEST.in', '.github/workflows/framework-release.yml']
+    paths: ['protoagent_framework/**', 'core/**', 'memory/**', 'framework/distribution/**', 'framework/f8_next/generation_transaction.py', 'framework/f8_next/durable_generation_transport.py', 'framework/f8_next/verified_tool_memory.py', 'tests/**', 'examples/**', 'tools/**', 'pyproject.toml', 'setup.py', 'MANIFEST.in', '.github/workflows/framework-release.yml']
   workflow_dispatch:
 permissions:
   contents: read

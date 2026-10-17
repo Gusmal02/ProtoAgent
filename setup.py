@@ -6,7 +6,7 @@ from pathlib import Path
 from setuptools import setup
 from setuptools.command.build_py import build_py
 from setuptools.command.sdist import sdist
-MODULES={'__init__','contracts','api','wire','canary_adapter','conformance',
+MODULES={'compositional_synthesis','compositional_generator','project_editing','__init__','contracts','api','wire','canary_adapter','conformance',
          'governed_sqlite','sqlite_connector','oracle_cache','proposals',
          'engine','session','state_codec','checkpoint_storage','resource_policy','telemetry','durable_counter','team','control_effects','obligations','work_budget',
          'memory_store','toolkit','native_tools','deliveries','workspace','collaboration','code_generator','programming_runtime','typed_synthesis','typed_synthesis_v2','typed_synthesis_v3','multifile_synthesis','reducer_store','runtime_config'}

@@ -168,6 +168,8 @@ class Session:
                     view['following_plan']=provider.following_plan()
                 if callable(getattr(provider,'verified_completions',None)):
                     view['verified_completions']=provider.verified_completions()
+                if callable(getattr(provider,'verified_replans',None)):
+                    view['verified_replans']=provider.verified_replans()
                 # callback that may change after the effect commits.
                 for method in ('deterministic_score','is_information_action'):
                     callback=getattr(provider,method,None)
@@ -199,6 +201,7 @@ class Session:
                 def planning_transition(self,state,action):return provider.planning_transition(operation,state,action)
                 def following_plan(self):return view.get('following_plan')
                 def verified_completions(self):return view.get('verified_completions',[])
+                def verified_replans(self):return view.get('verified_replans',[])
                 def __getattr__(self,name):
                     if name in ('snapshot','restore'): raise AttributeError(name)
                     if name in ('deterministic_score','is_information_action') and name in view:

@@ -49,6 +49,7 @@ def main():
         command('example_data',[root/'examples/referenced_data.py','--workspace',out/'example-data'])
         command('example_collaboration',[root/'examples/collaboration_data_ops.py','--workspace',out/'example-team'])
         if args.profile=='full':command('example_motor',[root/'examples/local_counter.py','--workspace',out/'example-motor'])
+        if args.profile=='full':command('p123_acceptance',[root/'tools/p123_campaign.py',out/'p123','--support',root/'tests/p123_support.py'],timeout=380)
         report['state']='passed'
     except Exception as exc:report['state']='failed';report['error']=type(exc).__name__+': '+str(exc)
     report['wall_seconds']=time.perf_counter()-started

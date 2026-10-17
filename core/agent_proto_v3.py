@@ -104,6 +104,7 @@ class ProtoAgentV3Config:
     enable_public_model_planning: bool = False
     enable_verified_plan_following: bool = False
     enable_verified_completion: bool = True
+    enable_verified_replanning: bool = True
 
 
 def _safe_float(value: Any) -> Any:
@@ -580,6 +581,20 @@ class ProtoAgentV3:
             if advice and advice.get('action') in legal:
                 chosen=next(c for c in candidates if c['action']==advice['action'])
                 planning_audit={'source':'verified_public_probe','proof_receipt':advice['proof_receipt'],'goal_scope':advice['goal_scope']}
+        replan_audit={'offered':0,'selected':False}
+        if getattr(self.cfg,'enable_verified_replanning',False) and hasattr(env,'verified_replans'):
+            valid=[]
+            for offer in env.verified_replans():
+                import hashlib,json
+                action=offer.get('action')
+                if action not in legal:continue
+                request=env.request_binding(action)
+                digest=hashlib.sha256(json.dumps(request,sort_keys=True,separators=(',',':'),allow_nan=False).encode()).hexdigest()
+                if offer.get('request_hash')==digest and offer.get('entity')==request.get('entity') and offer.get('revision')==request.get('revision') and offer.get('artifact_hash') and offer.get('evidence_hashes') and offer.get('goal_scope'):valid.append(offer)
+            if valid:
+                eligible={offer['action']:offer for offer in valid}
+                chosen=next(c for c in candidates if c['action'] in eligible)
+                replan_audit={'offered':len(valid),'selected':True,'source':'trusted_provider_evidence_obligation_policy','proof':eligible[chosen['action']],'execution_authority':False}
         completion_audit = {'offered':0,'selected':False}
         if getattr(self.cfg,'enable_verified_completion',False) and hasattr(env,'verified_completions'):
             offers=env.verified_completions()
@@ -613,6 +628,7 @@ class ProtoAgentV3:
         if self.cfg.block_on_review and authorization["decision"] != "allow":
             record = {
                 "verified_completion": completion_audit,
+                "verified_replanning": replan_audit,
                 "episode_step": step_idx,
                 "evidence_arbitration": evidence_arbitration,
                 "observation": _safe_float(observation),
@@ -730,6 +746,7 @@ class ProtoAgentV3:
         record = {
             "public_model_planning": planning_audit,
             "verified_completion": completion_audit,
+            "verified_replanning": replan_audit,
             "evidence_exploration": exploration_audit,
             "episode_step": step_idx,
             "contextual_cache": None if contextual_cache is None else {

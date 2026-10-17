@@ -66,12 +66,14 @@ class ToolDefinition:
     artifact:object=None
     agenda:object=None
     completion:object=None
+    replanning:object=None
     def __post_init__(self):
         if not self.name or self.kind not in ('observe','probe','execute','challenge','draft','compose','schedule','cancel','delegate'):raise ValueError('tool definition')
         if (self.handler is None)==(self.control is None):raise ValueError('declare exactly one native handler or control callback')
         if not all(callable(x) for x in (self.payload,self.available,self.score,self.handler or self.control)):raise ValueError('tool callbacks must be callable')
         if any(x is not None and not callable(x) for x in (self.artifact,self.agenda)):raise ValueError('artifact/agenda bindings must be callbacks')
         if self.completion is not None and not callable(self.completion):raise ValueError('completion must be a trusted callback')
+        if self.replanning is not None and not callable(self.replanning):raise ValueError('replanning must be a trusted callback')
 
 class ToolRegistry:
     def __init__(self,definitions):
@@ -121,10 +123,14 @@ class RegisteredProvider:
         Callbacks are trusted provider code, not fields parsed from a model.
         Current authorization must still be checked atomically by the handler.
         """
+        return self._verified_offers('completion')
+    def verified_replans(self):return self._verified_offers('replanning')
+    def _verified_offers(self,attribute):
         offers=[]
         for action,spec in self.registry.tools.items():
-            if spec.completion is None or not spec.available(self.view)[0]:continue
-            proof=spec.completion(self.view)
+            callback=getattr(spec,attribute)
+            if callback is None or not spec.available(self.view)[0]:continue
+            proof=callback(self.view)
             if proof is None:continue
             if type(proof) is not dict or set(proof)!={'entity','revision','goal_scope','artifact_hash','evidence_hashes'}:raise ValueError('completion proof schema')
             if proof['entity']!=self.entity or proof['revision']!=self.view.revision:raise ValueError('completion proof context')

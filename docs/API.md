@@ -4,6 +4,10 @@ API Python local, no HTTP/REST. Los identificadores del código están en inglé
 esta explicación está en español. Para empezar sin conocer las interfaces,
 usa [USO.md](USO.md). No importes módulos privados del laboratorio.
 
+Extensión de desarrollo0.2.0.dev7: ver [programación P1–P3](PROGRAMACION_P123.md).
+`ToolDefinition` añade `replanning(vista)` opcional con el mismo esquema de prueba
+que `completion`. Son obligaciones/evidencia confiables, no concesiones de autoridad.
+
 ## Sesiones
 
 ```python

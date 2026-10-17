@@ -1,0 +1,6 @@
+include README.md pyproject.toml setup.py
+recursive-include framework/distribution *.md LICENSE NOTICE
+recursive-include tests test_release_*.py release_crash_worker.py release_programming_worker.py
+recursive-include examples *.py
+include tools/release_gate.py
+include .github/workflows/framework-release.yml

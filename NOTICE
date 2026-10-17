@@ -1,0 +1,15 @@
+ProtoAgent Framework
+Copyright 2026 Gustavo and contributors.
+
+This SDK distribution is licensed under the Apache License, Version 2.0.
+The license covers the SDK and its bundled motor/library source closure,
+not unrelated projects or datasets that coexist in the research workspace.
+
+The motor/library are project source transformed only for namespaced imports.
+Source and generated hashes are recorded in motor/sources.json and
+runtime_sources.json. Engineering, evaluators and finite compilers were built
+with Codex assistance. Search-selected programs are not attributed as free-form
+code authored autonomously by the resonant motor.
+
+Optional third-party numerical libraries are separately installed dependencies,
+not relicensed or bundled into this wheel. Their own licenses and notices apply.

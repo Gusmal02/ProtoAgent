@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "protoagent-framework"
+version = "0.1.0rc3"
+description = "Experimental governed adapter SDK for the Resonant Memory Field ProtoAgent"
+readme = "framework/distribution/README.md"
+requires-python = ">=3.12,<3.13"
+license = "Apache-2.0"
+license-files = ["framework/distribution/LICENSE", "framework/distribution/NOTICE"]
+dependencies = []
+
+[project.optional-dependencies]
+motor = ["numpy>=2.1,<3", "torch>=2.6,<3", "networkx>=3.2,<4"]
+
+[project.scripts]
+protoagent-conformance = "protoagent_framework.conformance:main"
+
+[tool.setuptools]
+packages = ["protoagent_framework"]
+include-package-data = false
+
+[tool.setuptools.exclude-package-data]
+"*" = ["*.pyc"]

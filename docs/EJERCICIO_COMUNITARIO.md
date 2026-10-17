@@ -105,12 +105,14 @@ revisiones: no sustituye leerlas ni concede permisos de despliegue.
 Escribe tu razonamiento en una nota propia. Cuando termines, elige UNA opción:
 
 ```console
-python -m protoagent_framework.community mi-ejercicio/community-delivery --decision approve --reviewer "Tu nombre"
+python -I -m protoagent_framework.community mi-ejercicio/community-delivery --decision approve --reviewer "Tu nombre"
 ```
 
 Para rechazar, cambia `approve` por `reject`. La decisión se guarda en
 `human-decision.json` y no puede sobrescribirse. Si cambias el código, la
 aprobación se deniega: hace falta una nueva entrega y revisión.
+`-I` utiliza la instalación del entorno, evitando importar por accidente otra
+copia del SDK que tengas en la carpeta actual. Verifica primero el entorno activo.
 
 ## Qué significa esta aprobación
 

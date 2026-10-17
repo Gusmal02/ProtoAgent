@@ -1,5 +1,16 @@
 # Cambios
 
+## 0.2.0.dev10 — composición adaptativa de experiencias
+
+- DAGs de programas realmente generados y revisados como puntos de partida
+  para nuevos programas de tres entradas; identidad IR/código comprobada.
+- Tres encargos nuevos compuestos con100/100 reserva cada uno; fríos agotan
+  presupuesto. Primitivas y presupuestos iguales entre brazos.
+- `sort_key` genérico y estable; corrige una capacidad faltante observada en
+  dev9 sin cambiar el contrato ni borrar ese negativo.
+- Aceptación humana de la entrega dev8 registrada por petición explícita de
+  Gustavo. Perfil operativo v1 preparado, no activado ni sustituido por dev10.
+
 ## 0.2.0.dev8 — reutilización y revisión humana
 
 - Recuperación por descriptor público de interfaces entre contratos diferentes;

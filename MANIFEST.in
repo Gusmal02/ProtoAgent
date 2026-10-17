@@ -9,5 +9,8 @@ recursive-include examples *.py
 include tools/release_gate.py
 include tools/p123_campaign.py
 include tools/h45_campaign.py
+include tools/adaptive_campaign.py
+include tests/adaptive_support.py
+include docs/OPERACION_PERFIL_V1.json
 include ROADMAP.md
 include .github/workflows/framework-release.yml

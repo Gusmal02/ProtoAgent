@@ -51,6 +51,7 @@ def main():
         if args.profile=='full':command('example_motor',[root/'examples/local_counter.py','--workspace',out/'example-motor'])
         if args.profile=='full':command('p123_acceptance',[root/'tools/p123_campaign.py',out/'p123','--support',root/'tests/p123_support.py'],timeout=380)
         if args.profile=='full':command('h45_acceptance',[root/'tools/h45_campaign.py',out/'h45','--support',root/'tests/p123_support.py'],timeout=200)
+        if args.profile=='full':command('adaptive_acceptance',[root/'tools/adaptive_campaign.py',out/'adaptive','--support',root/'tests/p123_support.py','--evaluator',root/'tests/adaptive_support.py'],timeout=200)
         report['state']='passed'
     except Exception as exc:report['state']='failed';report['error']=type(exc).__name__+': '+str(exc)
     report['wall_seconds']=time.perf_counter()-started

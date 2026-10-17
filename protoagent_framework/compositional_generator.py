@@ -44,13 +44,13 @@ class CompositionalGenerator:
             if counterexample and counterexample not in examples:
                 examples.append(counterexample)
         used, rows, seconds = self.db.execute('SELECT candidates,rows,seconds FROM budget WHERE id=1').fetchone()
-        search = CompositionalSynthesizer()
+        search = self.make_search(contract)
         search.used, search.rows_used, search.elapsed = used, rows, seconds
         try:
             result = search.synthesize(contract, examples)
             files = compose_project(contract['project_files'], result['source']) if 'project_files' in contract else {'solution.py': result['source']}
             candidate = validate_candidate({'files': files}, 'finite_compositional_search_with_Codex_compiler')
-            candidate.update(search_evaluations=search.used - used, grammar='factored_typed_table_DAG_v1')
+            candidate.update(search_evaluations=search.used - used, grammar=result.get('grammar','factored_typed_table_DAG_v1'))
             output = {'generation_status': 'candidate', 'candidate': candidate,
                       'provenance': {'dag': result['dag'], 'compiler': 'Codex', 'selection': 'finite_search', 'feedback_used': len(examples) - len(contract['examples'])}}
         except SearchStopped as exc:
@@ -62,6 +62,9 @@ class CompositionalGenerator:
             self.db.execute('UPDATE budget SET candidates=?,rows=?,seconds=? WHERE id=1', (search.used, search.rows_used, search.elapsed))
             self.db.execute('UPDATE jobs SET state=?,result=? WHERE id=?', ('done', json.dumps(output), identity))
         return output
+
+    def make_search(self,contract):
+        return CompositionalSynthesizer()
 
     def close(self):
         if self.library:self.library.close()

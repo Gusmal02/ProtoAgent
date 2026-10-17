@@ -8,7 +8,7 @@ import subprocess
 import sys
 import time
 from pathlib import Path
-from protoagent_framework import Session
+from protoagent_framework import Session,__version__
 from protoagent_framework.engine import Engine
 from protoagent_framework.code_generator import sha
 from protoagent_framework.capability_reuse import CapabilityReuseGenerator
@@ -24,7 +24,7 @@ def run(root, support):
     began_all=time.perf_counter();cpu_all=time.process_time()
     report={'state':'running','training':[],'arms':{},'synthetic_only':True}
     (root/'manifest.json').write_text(json.dumps({'reserve_seed':84519,'reserve_count':100,'modes':['off','flat','contextual'],
-        'sdk':'0.2.0.dev8','dispatches':48,'generations':3,'candidate_limit':16,
+        'sdk':__version__,'dispatches':48,'generations':3,'candidate_limit':16,
         'controller_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         'support_sha256':hashlib.sha256(Path(support).read_bytes()).hexdigest()},indent=2))
     def factory(path,actor,budget):

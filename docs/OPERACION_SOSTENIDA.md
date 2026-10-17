@@ -3,6 +3,14 @@
 Estado: **preparación; no iniciada**. Primero completar el ejercicio y revisión
 humana real. Este documento no activa un servicio ni autoriza ocho horas.
 
+Gustavo aceptó la entrega concreta en este chat. La decisión está ligada al
+hash del código revisado; no se extiende a código futuro o despliegues.
+El [perfil v1 congelado](OPERACION_PERFIL_V1.json) fija baseline dev8, carga
+secuencial de480 slots/8h planificadas, límites y objetivos de aceptación.
+La duración es planificación, no un proceso iniciado ni SLO ya demostrado.
+Antes de activarlo falta implementar/calificar su supervisor y autorización
+expresa de corrida. La candidata del paso4 se evalúa aparte: no altera este perfil.
+
 ## Qué congelar antes de iniciar
 
 - Commit, wheel/hash y sistema operativo realmente calificados.

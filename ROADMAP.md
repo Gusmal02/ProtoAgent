@@ -1,7 +1,7 @@
 # Dirección de ProtoAgent: de capacidades verificadas a programación útil
 
 Actualización: **2026-10-17, después de la revisión ciega independiente**.
-Base de main:0.1.0rc3; candidata en rama de desarrollo:0.2.0.dev8.
+Base de main:0.1.0rc3; candidata en rama de desarrollo:0.2.0.dev10.
 El roadmap registra implementación y evidencia actuales, no sólo propuestas.
 No cambia las puertas históricas F8 ni autoriza campañas por sí mismo.
 
@@ -11,11 +11,13 @@ No cambia las puertas históricas F8 ni autoriza campañas por sí mismo.
 | H1: composición | Implementada para dos entradas. |100/100 reserva y30 regresiones; conserva referencia de seis operaciones. |
 | H2: ciclo del motor | Integrado y aprobado. | Generación, contraejemplo QA, reparación, nuevas revisiones, publicación y recuperación tras corte. |
 | H3: mantenimiento | Implementado para el proyecto Python/CLI acotado. | Cambios reales en dos módulos, API protegida y adaptación de requisito. |
-| H4: reutilización | Capacidad básica demostrada entre contratos con API/operación compartida. |100/100 por brazo; recuperación sin nueva síntesis frente a8055 candidatos sin memoria. |
-| H5: comunidad | Ejercicio ejecutable disponible y revisión independiente de IA positiva con condiciones. |16 ejemplos y4 casos propios correctos; dos aclaraciones documentales pendientes. |
-| Operación sostenida | Pendiente de preparación y autorización de la carga concreta. | Falta fijar SLO, retención, recursos y respuesta a incidentes. |
+| H4: reutilización | Recuperación y composición de experiencias verificadas demostradas en el alcance tabular. | Tres programas nuevos con tercera entrada,100/100 cada uno; búsqueda fría agota presupuesto. |
+| H5: comunidad | Guía aclarada, revisión ciega positiva condicional conservada y aceptación explícita de Gustavo registrada. | Hash del ejercicio aceptado; no concede aprobación a programas posteriores. |
+| Operación sostenida | Perfil v1 dev8 congelado, no activado. | Carga/SLO/recursos/retención fijados; falta supervisor calificado y autorización de corrida. |
 
 La candidata pasó27 pruebas y cuatro perfiles de CI Windows/Ubuntu base/full.
+Ese resultado corresponde a dev8. Dev10 pasó30 pruebas instaladas y la
+aceptación P1–P3/H4–H5/composición; su CI se registra por commit por separado.
 Ver [CI dev8](https://github.com/Gusmal02/ProtoAgent/actions/runs/39046368401),
 [P1–P3](docs/PROGRAMACION_P123.md) y [ejercicio comunitario](docs/EJERCICIO_COMUNITARIO.md).
 
@@ -84,6 +86,11 @@ host. Mantener esa autoría visible permite saber qué mejoramos realmente.
 Las cuatro primeras brechas se abordaron con P1–P3 para el subconjunto publicado;
 no siguen siendo bloqueos idénticos a los del diagnóstico inicial. La expansión
 a otros programas y contextos continúa abierta. Esta tabla conserva su trazabilidad.
+
+Dev10 compuso la experiencia anterior con ajustes, reservas y anexado estable
+de tercera fuente:300/300 casos reservados. Véase
+[composición verificada](docs/COMPOSICION_VERIFICADA.md). Dev9 conserva el negativo
+de ordenación; sort_key genérico añadido a ambos brazos, no inventado por el motor.
 
 | Brecha observada | Acción que la cierra | Evidencia de salida |
 |---|---|---|
@@ -226,14 +233,16 @@ detener la expansión del banco, diagnosticar y conservar la versión negativa.
 1. **Completado: aclaraciones de la revisión ciega.** La guía especifica
    duplicados/positivos/ceros y cálculo del hash canónico. Comando y ejemplo
    comprobados, sin repetir las campañas aceptadas ni modificar el runtime.
-2. **En espera de decisión: primer uso comunitario.** Una persona sigue el ejercicio, revisa la entrega
+2. **Completado: aceptación del ejercicio por Gustavo.** Se registró su mensaje
+   explícito «lo acepto» ligado al hash dev8. La reproducción integral por más
+   usuarios sigue siendo una futura ampliación comunitaria. Una persona sigue el ejercicio, revisa la entrega
    y registra aceptar/rechazar con sus motivos. La aprobación automática y la
    revisión ciega de IA ya realizadas no se descartan ni se confunden con esto.
-3. **Preparar operación sostenida:** congelar paquete, carga, duración, SLO,
+3. **Completada la preparación v1, sin activar:** paquete dev8, carga, duración, SLO,
    recursos, retención, cancelación e incidentes según la
    [puerta operativa](docs/OPERACION_SOSTENIDA.md). Revisar promoción de main
    por separado; no desplegar ni arrancar ocho horas desde este documento.
-4. **Siguiente avance de capacidad:** reutilización composicional/adaptativa
+4. **Implementado y evaluado en dev10:** reutilización composicional/adaptativa
    para operaciones distintas y proyectos más diversos, sin perder la regresión
    ya aprobada. Código hostil exige aislamiento real antes de admitirlo.
 

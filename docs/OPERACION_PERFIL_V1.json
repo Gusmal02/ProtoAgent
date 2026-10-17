@@ -1,0 +1,56 @@
+{
+  "schema": 1,
+  "status": "frozen_preparation_not_started",
+  "activation_requires_explicit_authorization": true,
+  "baseline": {
+    "sdk": "0.2.0.dev8",
+    "code_commit": "53607a0b6aca46972efaadfaaaa95c48277d9d93",
+    "wheel_sha256": "6cd79c7cbc41f73eca3306dc11d06bf3a9828f07e1900038bba4a5c123e681c4",
+    "approved_artifact": "81a3fab240104777191b722a71ba9dda03b5f15b834a688fe09bded893377715",
+    "human_reviewer": "Gustavo",
+    "review_scope": "local exercise only, not deployment authority"
+  },
+  "workload": {
+    "environment": "local_synthetic_only",
+    "workers": 1,
+    "cadence_seconds": 60,
+    "planned_duration_seconds": 28800,
+    "planned_slots": 480,
+    "mix": ["store_reuse", "consultancy_reuse", "incompatible_requirement_reject"],
+    "new_code_generation": false,
+    "LLM_API_Docker_network": false,
+    "max_dispatches_per_mission": 48,
+    "max_retrieval_candidates": 16,
+    "max_probe_checks_per_candidate": 128
+  },
+  "acceptance": {
+    "incorrect_results": 0,
+    "unauthorized_effects": 0,
+    "duplicate_effects": 0,
+    "startup_grace_seconds": 30,
+    "mission_deadline_seconds": 20,
+    "proposed_warm_p95_seconds": 5,
+    "SLO_status": "target_to_validate_not_already_achieved"
+  },
+  "resources": {
+    "worker_private_bytes_limit": 536870912,
+    "output_bytes_limit": 1073741824,
+    "on_limit": "durably_pause_own_worker_notify_no_foreign_process_termination",
+    "free_RAM_minimum": "no_new_floor_explicit_prior_exception_preserved",
+    "measurement": ["CPU_self_and_children_separate", "RSS_private_peak", "available_RAM", "disk", "step_and_mission_latency"]
+  },
+  "continuity": {
+    "checkpoint": "after_each_receipt_and_terminal_mission",
+    "uncertain_effect": "block_until_explicit_reconciliation",
+    "resume_budget": "preserve_total_no_reset",
+    "cancellation": "durable_stop_request_for_owned_supervisor",
+    "evidence": "retain_all_inputs_receipts_hashes_checks_and_negatives_no_automatic_deletion"
+  },
+  "before_activation": [
+    "implement_and_qualify_supervisor_for_this_profile",
+    "validate_deadline_pause_resume_resource_measurement_and_stop",
+    "verify_exact_package_process_identity_and_available_resources",
+    "obtain_explicit_run_authorization"
+  ],
+  "new_candidate_rule": "step4_candidate_cannot_replace_frozen_dev8_without_new_qualification_and_profile_revision"
+}

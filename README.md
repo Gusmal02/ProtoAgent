@@ -1,8 +1,9 @@
 # ProtoAgent Framework
 
-> Rama de desarrollo: candidata **0.2.0.dev8**, programación composicional
+> Rama de desarrollo: candidata **0.2.0.dev10**, programación composicional
 > y reutilización entre contratos. [P1–P3](docs/PROGRAMACION_P123.md) ·
 > [Ejercicio comunitario paso a paso](docs/EJERCICIO_COMUNITARIO.md).
+> [Composición de experiencias verificadas con una tercera entrada](docs/COMPOSICION_VERIFICADA.md).
 > La entrega rc3 descrita abajo se conserva como referencia de la versión previa.
 
 ### Decidir, explorar y coordinar con memoria y evidencia. Sin depender de un LLM en cada paso.

@@ -11,6 +11,7 @@ def apply(rows,instruction,key,value):
     if op=='scale':return [{**r,value:r[value]*arg} for r in rows]
     if op=='offset':return [{**r,value:r[value]+arg} for r in rows]
     if op=='sort':return sorted((dict(r) for r in rows),key=lambda r:(r[key],r[value]),reverse=arg)
+    if op=='sort_key':return sorted((dict(r) for r in rows),key=lambda r:r[key],reverse=arg)
     if op=='group_sum':
         sums={}
         for r in rows:sums[r[key]]=sums.get(r[key],0)+r[value]
@@ -37,6 +38,7 @@ def compile_python(program,key,value):
         elif op in ('scale','offset'):
             sign='*' if op=='scale' else '+';lines.append(f'    rows = [dict(r, **{{{value!r}: r[{value!r}] {sign} {arg!r}}}) for r in rows]')
         elif op=='sort':lines.append(f'    rows = sorted(rows, key=lambda r: (r[{key!r}], r[{value!r}]), reverse={arg!r})')
+        elif op=='sort_key':lines.append(f'    rows = sorted(rows, key=lambda r: r[{key!r}], reverse={arg!r})')
         elif op=='group_sum':lines.extend(['    sums = {}','    for r in rows:',f'        sums[r[{key!r}]] = sums.get(r[{key!r}], 0) + r[{value!r}]',f'    rows = [{{{key!r}: k, {value!r}: v}} for k, v in sums.items()]'])
         elif op=='unique':lines.extend(['    seen = set()','    result = []','    for r in rows:',f'        identity = (r[{key!r}], r[{value!r}])','        if identity not in seen:','            seen.add(identity)','            result.append(r)','    rows = result'])
         else:raise ValueError('unknown IR opcode')

@@ -7,7 +7,7 @@ from .native_tools import NativeToolStore
 from .workspace import RuntimeWorkspace,WorkspaceError
 from .session import Session,create_session
 from .team import TeamCoordinator,RoleSession
-__version__='0.2.0.dev8'
+__version__='0.2.0.dev10'
 __all__=['QuerySpec','ActionSpec','Contract','Evidence','Decision','Outcome',
          'AdapterManifest','Capability','ContractError','GovernedRuntime','ExecutionResult']
 __all__+=['MemoryStore','MemoryReference','ReferencedProvider','ReferenceError','Observation','ToolDefinition','ToolRequest','ToolResult','ToolRegistry','RegisteredProvider','ResourceRequest','NativeToolStore','RuntimeWorkspace','WorkspaceError','Session','create_session','TeamCoordinator','RoleSession']

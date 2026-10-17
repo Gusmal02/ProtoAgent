@@ -71,3 +71,5 @@ sintético mínimo. No subas claves, datos personales ni bases privadas. Consult
 Después de revisión humana real se podrá preparar operación sostenida:
 carga útil, SLO, retención, recursos, respuesta a incidentes y aprobación de
 despliegue. Este ejercicio no lanza servicios ni una campaña de ocho horas.
+La [puerta de operación sostenida](OPERACION_SOSTENIDA.md) enumera lo que
+debe fijarse después de la revisión humana.

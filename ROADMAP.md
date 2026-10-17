@@ -17,7 +17,9 @@ No cambia las puertas históricas F8 ni autoriza campañas por sí mismo.
 
 La candidata pasó27 pruebas y cuatro perfiles de CI Windows/Ubuntu base/full.
 Ese resultado corresponde a dev8. Dev10 pasó30 pruebas instaladas y la
-aceptación P1–P3/H4–H5/composición; su CI se registra por commit por separado.
+aceptación P1–P3/H4–H5/composición; también aprobaron sus cuatro perfiles remotos.
+Ver [CI dev10](https://github.com/Gusmal02/ProtoAgent/actions/runs/39049823856)
+en el commit de código55ac796. La aprobación no inicia operación sostenida.
 Ver [CI dev8](https://github.com/Gusmal02/ProtoAgent/actions/runs/39046368401),
 [P1–P3](docs/PROGRAMACION_P123.md) y [ejercicio comunitario](docs/EJERCICIO_COMUNITARIO.md).
 

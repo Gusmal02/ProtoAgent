@@ -11,6 +11,16 @@ Tú revisas la entrega final. No necesitas credenciales ni pagar un modelo.
 
 Usa Python3.12 y un entorno virtual, como explica [USO.md](USO.md). Instala
 la candidata con el extra motor (`pip install ".[motor]"` desde su código).
+Si aún no tienes la carpeta del proyecto:
+
+```console
+git clone --branch codex/p1-p3-programming https://github.com/Gusmal02/ProtoAgent.git
+cd ProtoAgent
+python -m venv .venv
+```
+
+Activa el entorno: en Windows, `.venv\Scripts\activate`; en Linux/macOS,
+`source .venv/bin/activate`. Después instala con `python -m pip install ".[motor]"`.
 En Windows puedes usar `python`; en Linux suele ser `python3`.
 Desde la carpeta del proyecto ejecuta:
 

@@ -4,6 +4,10 @@ Documento técnico de la candidata **0.1.0rc3**. Para instalar y ejecutar sin
 conocer el proyecto, empieza por [USO.md](docs/USO.md). Este documento distingue
 contratos implementados, observaciones experimentales y capacidades aún abiertas.
 
+Para juegos, SOC, contención y exploración matemática de versiones anteriores,
+consulta [Experimentos por dominio](docs/EXPERIMENTOS.md). Ese registro diferencia
+prototipos/adaptadores históricos de la calificación del SDK rc3 descrita aquí.
+
 ## 1. Arquitectura de ejecución
 
 ProtoAgent distribuye un SDK Python y una clausura de dependencias del motor

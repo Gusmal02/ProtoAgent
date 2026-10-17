@@ -24,7 +24,10 @@ de comprensión y funcionamiento independiente. Su dictamen fue **condicional**,
 no un rechazo funcional ni una aprobación humana. Encontró dos brechas de guía:
 semántica de deduplicación/ceros y método para reproducir el hash del artefacto.
 La comprobación posterior confirmó que el hash canónico sí coincide: no se
-observó alteración del código. Los dos puntos siguen pendientes de documentación.
+observó alteración del código. Las dos aclaraciones ya se incorporaron a la guía:
+reglas precisas, ejemplo manual y comando reproducible del hash. Se comprobaron
+el hash, el ejemplo y casos vacío/saldo cero/saldo negativo. Se conserva el
+dictamen ciego condicional original; no se inventa una segunda revisión ciega.
 
 ## 1. Dirección elegida
 
@@ -220,10 +223,10 @@ detener la expansión del banco, diagnosticar y conservar la versión negativa.
 
 ## 8. Próximos pasos, en orden
 
-1. **Cerrar las dos observaciones de la revisión ciega:** especificación clara
-   de duplicados/positivos/ceros y procedimiento reproducible del hash canónico.
-   Verificar instrucciones; no hace falta repetir P1–P3 ni cientos de misiones.
-2. **Primer uso comunitario:** una persona sigue el ejercicio, revisa la entrega
+1. **Completado: aclaraciones de la revisión ciega.** La guía especifica
+   duplicados/positivos/ceros y cálculo del hash canónico. Comando y ejemplo
+   comprobados, sin repetir las campañas aceptadas ni modificar el runtime.
+2. **En espera de decisión: primer uso comunitario.** Una persona sigue el ejercicio, revisa la entrega
    y registra aceptar/rechazar con sus motivos. La aprobación automática y la
    revisión ciega de IA ya realizadas no se descartan ni se confunden con esto.
 3. **Preparar operación sostenida:** congelar paquete, carga, duración, SLO,

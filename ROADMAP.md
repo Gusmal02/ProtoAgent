@@ -1,22 +1,30 @@
 # Dirección de ProtoAgent: de capacidades verificadas a programación útil
 
-Actualización: 2026-10-16. **Estrategia propuesta**, no promesa de fechas ni
-autorización para ejecutar campañas. Base pública:0.1.0rc3. No cambia las puertas
-históricas F8, no reinicia E1–E3 y no declara operación sostenida aprobada.
+Actualización: **2026-10-17, después de la revisión ciega independiente**.
+Base de main:0.1.0rc3; candidata en rama de desarrollo:0.2.0.dev8.
+El roadmap registra implementación y evidencia actuales, no sólo propuestas.
+No cambia las puertas históricas F8 ni autoriza campañas por sí mismo.
 
-Decisión posterior: Gustavo aceptó la dirección y solicitó planificar P1–P3
-(constructor composicional, integración con motor y proyecto Python). El plan
-detallado está preparado en el laboratorio; su implementación no se ha iniciado.
-H4/H5 permanecen posteriores, no campañas paralelas.
+| Hito | Estado actual | Evidencia principal |
+| --- | --- | --- |
+| H0: SDK y contrato | Implementado y calificado en el alcance publicado. | API, instalación externa, licencia y CI. |
+| H1: composición | Implementada para dos entradas. |100/100 reserva y30 regresiones; conserva referencia de seis operaciones. |
+| H2: ciclo del motor | Integrado y aprobado. | Generación, contraejemplo QA, reparación, nuevas revisiones, publicación y recuperación tras corte. |
+| H3: mantenimiento | Implementado para el proyecto Python/CLI acotado. | Cambios reales en dos módulos, API protegida y adaptación de requisito. |
+| H4: reutilización | Capacidad básica demostrada entre contratos con API/operación compartida. |100/100 por brazo; recuperación sin nueva síntesis frente a8055 candidatos sin memoria. |
+| H5: comunidad | Ejercicio ejecutable disponible y revisión independiente de IA positiva con condiciones. |16 ejemplos y4 casos propios correctos; dos aclaraciones documentales pendientes. |
+| Operación sostenida | Pendiente de preparación y autorización de la carga concreta. | Falta fijar SLO, retención, recursos y respuesta a incidentes. |
 
-2026-10-17: H4 implementado en dev8 para reutilización de código completo entre
-contratos/contextos que comparten interfaz y transformación. H5 ofrece ejercicio
-ejecutable y handoff humano; falta revisión comunitaria real y operación
-sostenida. La recuperación no demuestra invención de un algoritmo nuevo.
+La candidata pasó27 pruebas y cuatro perfiles de CI Windows/Ubuntu base/full.
+Ver [CI dev8](https://github.com/Gusmal02/ProtoAgent/actions/runs/39046368401),
+[P1–P3](docs/PROGRAMACION_P123.md) y [ejercicio comunitario](docs/EJERCICIO_COMUNITARIO.md).
 
-Ejecución posterior autorizada: candidata0.2.0.dev7 implementa P1–P3 y pasó la
-secuencia local. Ver [programación P1–P3](docs/PROGRAMACION_P123.md) y los resultados
-de CI para la calificación de cada paquete. H4/H5 no se declaran cerrados.
+La revisión ciega con GPT-6-Luna, sin historial ni oráculo, es una señal positiva
+de comprensión y funcionamiento independiente. Su dictamen fue **condicional**,
+no un rechazo funcional ni una aprobación humana. Encontró dos brechas de guía:
+semántica de deduplicación/ceros y método para reproducir el hash del artefacto.
+La comprobación posterior confirmó que el hash canónico sí coincide: no se
+observó alteración del código. Los dos puntos siguen pendientes de documentación.
 
 ## 1. Dirección elegida
 
@@ -43,17 +51,17 @@ externo permanece como extensión opcional, no atajo para atribuir síntesis al 
 |---|---|---|
 | SDK | API Python, instalación externa, ejemplos y documentación española. | Público, candidato experimental. |
 | Ingeniería de ejecución | Sesiones, recibos, auditoría, presupuesto, revocación, cortes y backup cooperativo. | Calificado en el alcance local documentado. |
-| CI | Windows/Ubuntu, base/motor; cuatro perfiles iniciales aprobados. | Automatizada; no equivale a servicio continuo. |
+| CI | dev8:27 pruebas y cuatro perfiles Windows/Ubuntu base/motor aprobados. | Automatizada, con aceptación P1–P3 y H4–H5. |
 | Motor y herramientas | Decide acciones y solicita generación/revisión/publicación en la misión multifichero. | Integración real, repertorio acotado. |
-| Constructor tabular | dev24:30/32 misiones; dev25 resuelve referencia de seis operaciones. | Backend experimental de búsqueda, no resultado cognitivo del motor. |
+| Constructor tabular | Composición de dos entradas,100/100 reserva y regresiones previas. | Síntesis finita conectada al motor; no Python arbitrario. |
 | Calidad | Política robusta:1518/1518 casos frente a1322/1518 de primeras/mínimo en el banco fresco. | Aún separada del decisor resonante. |
-| Biblioteca | Registro, recuperación contextual, materialización y revalidación. | Pública; ventaja transferible por demostrar. |
+| Biblioteca | Recupera código previo para un contrato nuevo, revalida y vuelve a revisar. | Reutilización útil demostrada; sin ventaja temporal contextual frente al catálogo plano en el caso medido. |
+| Consumidor independiente | Revisión ciega de IA:20 comprobaciones correctas, dos hallazgos documentales. | Resultado positivo condicional; instalación independiente y revisión humana no cerradas por ese ensayo. |
 | Juegos/SOC/matemáticas | Rutas, selección de evidencia, certificados y negativos conservados. | Adaptadores históricos; no todas las capacidades vienen preinstaladas. |
 
-La síntesis multifichero actual emite reglas seleccionadas y cableado fijo de
-interfaces/almacenamiento. Varias herramientas, políticas y verificadores son
-ingeniería explícita del host. Mantener esa autoría visible permite saber qué
-mejoramos realmente.
+La edición acotada modifica funciones reales y conserva CLI/funciones protegidas.
+Gramática, compilador, políticas y verificadores son ingeniería explícita del
+host. Mantener esa autoría visible permite saber qué mejoramos realmente.
 
 ## 3. Fortalezas que conviene desarrollar
 
@@ -69,6 +77,10 @@ mejoramos realmente.
    revisión por hash para mantener un proyecto, no añadir roles por cantidad.
 
 ## 4. Debilidades y acciones prioritarias
+
+Las cuatro primeras brechas se abordaron con P1–P3 para el subconjunto publicado;
+no siguen siendo bloqueos idénticos a los del diagnóstico inicial. La expansión
+a otros programas y contextos continúa abierta. Esta tabla conserva su trazabilidad.
 
 | Brecha observada | Acción que la cierra | Evidencia de salida |
 |---|---|---|
@@ -139,6 +151,14 @@ Código existente/solución del evaluador quedan fuera del corpus del constructo
 
 ### H4 — Aprendizaje operativo reutilizable
 
+**Estado:** reutilización de código completo demostrada en dev8. Tres brazos
+aciertan100/100; sin memoria se exploran8055 candidatos y con memoria ninguno,
+añadiendo16 comprobaciones de recuperación y revisiones actuales. Preparación
+común:31074 candidatos y636444 operaciones-fila. No se atribuye coste cero.
+No hubo ventaja temporal del descriptor frente al catálogo plano; no se necesita
+repetir este ensayo para reconocer el avance. Próxima ampliación: componer o
+adaptar capacidades ante operaciones realmente diferentes, con banco nuevo.
+
 Guardar sólo subprogramas de trayectorias reales y verificadas. Medir si ayudan
 en nuevos contratos bajo el mismo catálogo y presupuesto; comparar sin memoria,
 catálogo plano y biblioteca contextual. No atribuir macros de un solver privado
@@ -149,6 +169,12 @@ sin presentarlo como aprendizaje demostrado.
 aceptaciones incorrectas. Reinicio/revisión de contrato no recuperan autoridad antigua.
 
 ### H5 — Producto comunitario y operación sostenida
+
+**Estado:** ejercicio y mecanismo de entrega/revisión disponibles. La revisión
+ciega independiente dio evidencia funcional positiva y dos condiciones de guía.
+No repetir otro benchmark masivo para corregir esos puntos: aclararlos y comprobar
+sus ejemplos/instrucciones. Después, uso por una persona y preparación operativa.
+La revisión artificial se conserva como evidencia propia, sin etiquetarla humana.
 
 Ofrecer ejercicios de la empresa simulada, plugins/adaptadores confiables,
 plantillas de contratos y revisión externa humana. Mantener matrices de CI,
@@ -192,14 +218,21 @@ detener la expansión del banco, diagnosticar y conservar la versión negativa.
 - Programación libre desde lenguaje natural como requisito inmediato del motor local.
 - Reabrir E1–E3, promover F8 integral o iniciar8h/24h/72h por actualizar este documento.
 
-**Actualización 2026-10-17:** P1–P3 ya están implementados en la candidata
-`0.2.0.dev7`, con 24 pruebas instaladas y aceptación integrada aprobadas
-localmente. Incluye construcción de dos entradas, reparación por QA,
-corte/reanudación y edición de proyecto con cambio de requisito.
-Véase [resultados y reproducción](docs/PROGRAMACION_P123.md).
-Siguiente puerta: revisión de la candidata y CI multiplataforma antes de
-promover main; después, ampliar diversidad de encargos y composición soportada
-con evidencia nueva, conservando las fronteras no resueltas.
+## 8. Próximos pasos, en orden
+
+1. **Cerrar las dos observaciones de la revisión ciega:** especificación clara
+   de duplicados/positivos/ceros y procedimiento reproducible del hash canónico.
+   Verificar instrucciones; no hace falta repetir P1–P3 ni cientos de misiones.
+2. **Primer uso comunitario:** una persona sigue el ejercicio, revisa la entrega
+   y registra aceptar/rechazar con sus motivos. La aprobación automática y la
+   revisión ciega de IA ya realizadas no se descartan ni se confunden con esto.
+3. **Preparar operación sostenida:** congelar paquete, carga, duración, SLO,
+   recursos, retención, cancelación e incidentes según la
+   [puerta operativa](docs/OPERACION_SOSTENIDA.md). Revisar promoción de main
+   por separado; no desplegar ni arrancar ocho horas desde este documento.
+4. **Siguiente avance de capacidad:** reutilización composicional/adaptativa
+   para operaciones distintas y proyectos más diversos, sin perder la regresión
+   ya aprobada. Código hostil exige aislamiento real antes de admitirlo.
 
 ## Referencias y estado de decisiones
 

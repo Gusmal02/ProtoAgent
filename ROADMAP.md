@@ -187,8 +187,14 @@ detener la expansión del banco, diagnosticar y conservar la versión negativa.
 - Programación libre desde lenguaje natural como requisito inmediato del motor local.
 - Reabrir E1–E3, promover F8 integral o iniciar8h/24h/72h por actualizar este documento.
 
-**Siguiente paso útil:** H0 y diseño/implementación H1 con regresión de la frontera
-conocida. Esta revisión no inició implementaciones ni ejecutó nuevos experimentos.
+**Actualización 2026-10-17:** P1–P3 ya están implementados en la candidata
+`0.2.0.dev7`, con 24 pruebas instaladas y aceptación integrada aprobadas
+localmente. Incluye construcción de dos entradas, reparación por QA,
+corte/reanudación y edición de proyecto con cambio de requisito.
+Véase [resultados y reproducción](docs/PROGRAMACION_P123.md).
+Siguiente puerta: revisión de la candidata y CI multiplataforma antes de
+promover main; después, ampliar diversidad de encargos y composición soportada
+con evidencia nueva, conservando las fronteras no resueltas.
 
 ## Referencias y estado de decisiones
 
